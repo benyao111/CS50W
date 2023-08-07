@@ -1,0 +1,17 @@
+body {
+    padding: 10px;
+}
+
+#labeldesc {
+    vertical-align: top;
+}
+
+.spaced {
+    margin: 10px;
+}
+
+.nodecoration:hover, .nodecoration:visited, .nodecoration:link, .nodecoration:active
+{
+    color: black;
+    text-decoration: none;
+}

@@ -1,0 +1,49 @@
+.searchbar {
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+}
+
+#textfield{
+    border-radius: 25px;
+    text-indent: 10px;
+    text-align: left;
+    width: 380px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.logo > #doglogo{
+    display:block;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+
+}
+
+#searchbutton{
+    padding: 5px;
+    margin: 5px;
+    font-size: 12px;
+}
+
+
+.topbuttons{
+    text-align: right;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:  10px;
+    margin-right: 10px;
+}
+
+.leftbuttons{
+    float: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:  10px;
+    word-spacing: 10px;
+    margin-left: 10px;
+}
+
+#topbutton2{
+    margin-left: 10px;
+}

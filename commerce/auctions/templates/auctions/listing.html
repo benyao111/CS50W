@@ -1,0 +1,104 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+    <h2>Details for Listing: {{Auction_Listing.listing}}</h2>
+    {% if user.is_authenticated %}
+    <div class = 'row'>
+        <div class = "col-md-10">
+                {% if Auction_Listing.id in watchlist %}
+                    <form action = "{% url 'watchlist' %}" method = "post">
+                    {%csrf_token%}
+                    <input type = 'hidden' name = 'listing_id_remove' value = "{{Auction_Listing.id}}">
+                    <button class = "btn btn-primary">Remove from Watchlist</button>
+                    </form>
+                {% else %}
+                    <form action = "{% url 'watchlist' %}" method = "post">
+                    {%csrf_token%}
+                    <input type = 'hidden' name = 'listing_id' value = "{{Auction_Listing.id}}">
+                    <button class = "btn btn-primary">Add to Watchlist</button>
+                    </form>
+                {% endif %}
+        </div>
+    {% endif %}
+        {% if user.is_authenticated %}
+            <div class = 'col-md-2' >
+                {% if Auction_Listing.username == user.username %}
+                    {% if Auction_Listing.active == True %}
+                        <form action = "{% url 'closeauctionlisting' Auction_Listing.id %}" method = 'post'>
+                        {%csrf_token%}
+                        <button class="btn btn-danger">Close Listing</button>
+                        </form>
+                    {% else %}
+                        <form action = "{% url 'closeauctionlisting' Auction_Listing.id %}" method = 'post'>
+                        {%csrf_token%}
+                        <button class="btn btn-danger">Reopen Listing</button>
+                        </form>
+                    {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+    {% if Auction_Listing.active == False %}
+
+        {% if winner.user.username == user.username %}
+        <h5 style = "margin-top: 20px">You have won!</h5>
+        {%elif winner == None%}
+        <h5 style = "margin-top: 20px">No one has won, the auction has been closed.</h5>
+        {%else%}
+        <h5 style = "margin-top: 20px">{{winner.user.username}} has won, you are not the winner sorry. </h5>
+        {% endif %}
+    {% endif %}
+    <div class = 'row' style="margin: 20px">
+        <div class = 'col-md-6' style="text-align: center;">
+            <img src="{{Auction_Listing.listing_url}}" style = "border: 1px solid lightgray; margin: 10px; padding: 10px; border-radius: 10px; width: 60%;">
+        </div>
+        <div class = 'col-md-4'>Description:
+            <ul>
+                <li>{{Auction_Listing.listing}}</li>
+                <li>{{Auction_Listing.listing_description}}</li>
+                <li>Listed by: {{Auction_Listing.username}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div >
+    {% if Auction_Listing.active == True %}
+        <form action = "{% url 'listing' Auction_Listing.id %}" method = "post">
+            {%csrf_token%}
+            Place Bid: <input type='number' step='0.01' value='{{Auction_Listing.listing_price}}' name = 'bid' style="width: 35%"/>
+            <button class = "btn btn-primary">Place Bid</button>
+        </form>
+        {% if message == "Bid placed"%}
+            <div>Your bid has been placed!</div>
+        {% else %}
+            <div>{{message}}</div>
+        {% endif %}
+    {% endif %}
+    <div>Current Bid for {{Auction_Listing.listing}}:</div>
+    <div><strong><h5>${{Auction_Listing.listing_price}}</h5></strong></div>
+    </div>
+
+    <div style="margin-top: 10px; margin-bottom: 10px;">Comments:  </div>
+    <div style="margin-left: 50px;">
+    <form action = "{% url 'listing' Auction_Listing.id %}" method = "post">
+        {%csrf_token%}
+        <input type = "text" name = 'comment' style = "width: 41%">
+        <button class = 'btn btn-primary'>Post</button>
+    </form>
+    </div>
+    <ul style="list-style-type: none;">
+
+    {% for i in commentlist %}
+        <div style="border: 1px solid lightgray; margin: 10px; padding: 10px; border-radius: 10px; width: 41%;">
+            <li>{{i.user.username}}: {{i.comment}}</li>
+        </div>
+    {% endfor %}
+
+    </ul>
+
+
+    {% else %}
+    <div><h6>Please log in or create an account.</h6></div>
+    {% endif %}
+
+{% endblock %}

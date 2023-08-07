@@ -1,0 +1,37 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Create a Listing</h2>
+    <p></p>
+    <form action = "{% url 'index' %}" method = 'post'>
+        {%csrf_token%}
+        <div class = 'form-group'> <strong> Title: </strong>
+
+            <input type = "text" placeholder="Title of Listing" name = "title" required>
+        </div>
+        <div class = 'form-group'>
+            <label for="descriptiontextarea" id = "labeldesc"> <strong> Description: </strong> </label>
+            <textarea placeholder="Description" rows = "5" cols = "50" id = "descriptiontextarea" name = "description"></textarea>
+        </div>
+        <div class = 'form-group'> <strong> Starting Bid: $</strong>
+            <input name = "starting_bid" type="number" min="0.00" step="0.01" max="10000000" value="0.00" placeholder = "Starting Bid" required>
+        </div>
+        <div class = 'form-group'> <strong> Image URL: </strong>
+            <input type = "text" name = "image_url" placeholder="Image URL" >
+            or <strong> Image File Upload: </strong>
+            <input type="file" id="formFile" name="image_file">
+        </div>
+        <div class = 'form-group'> <strong> Select Category: </strong>
+        <select name = "category" class = "form-control-sm">
+            <option>None</option>
+            <option>Fashion</option>
+            <option>Toys</option>
+            <option>Electronics</option>
+            <option>Home</option>
+            <option>Food</option>
+        </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Listing</button>
+
+    </form>
+{% endblock %}

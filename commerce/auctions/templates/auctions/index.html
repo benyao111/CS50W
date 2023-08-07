@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    {% for i in Auction_Listings %}
+        <div class = 'row' style="border: 1px solid lightgray; margin: 50px; padding: 20px; border-radius: 10px;">
+            <div class = 'col-md-4'> <a class = 'nodecoration' href = "{% url 'listing' i.id %}"> <img src = '{{i.listing_url}}' style="width: 50%;"> </a> </div>
+            <div class = 'col-md-4'>
+                <ul style="list-style-type: none">
+                    <li class = "spaced"> <h5><a class = 'nodecoration' href = "{% url 'listing' i.id %}"><strong>{{i.listing}}</strong></a></h5></li>
+                    <li class = "spaced"><strong>Price: </strong>${{i.listing_price}}</li>
+                    <li class = "spaced">Created by {{i.username}}</li>
+                </ul>
+            </div>
+        </div>
+
+
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Wiki - Search Results
+{% endblock %}
+
+{% block body %}
+    {% if possible_entries|length > 0 %}
+        <h1>Did you mean: </h1>
+    {% endif %}
+    {% for entry in possible_entries %}
+            <li><a href = '/wiki/{{entry}}' > {{ entry }} </a> </li>
+    {% empty %}
+        <h1>Error: Sorry, no matching search results </h1>
+    {% endfor %}
+
+{% endblock %}

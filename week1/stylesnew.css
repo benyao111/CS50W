@@ -1,0 +1,32 @@
+.topsearch{
+    text-align: right;
+    margin-right: 10px;
+    font-size: 10px;
+}
+
+#advsearchrow{
+    margin-left: 20px;
+    
+}
+
+#findpageswith{
+    margin-top: 20px;
+    margin-left:20px;
+    font-size: 13px;
+}
+
+#searchrow{
+    margin: 20px;
+    font-size: 10px;
+    
+}
+
+.searchfield{
+    width:100%;
+}
+
+#advsearchbtn{
+    border-radius: 0px;
+    font-size: 10px;
+    float: right;
+}

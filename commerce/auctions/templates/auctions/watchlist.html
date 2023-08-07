@@ -1,0 +1,20 @@
+{% extends 'auctions/layout.html'%}
+
+
+{% block body %}
+    <h2>My Watchlist</h2>
+    {% for i in watchlist %} <!-- for i in my watchlist. create db with watchlist items -->
+        <div class = 'row' style="border: 1px solid lightgray; margin: 50px; padding: 20px; border-radius: 10px;">
+            <div class = 'col-md-4'> <a class = 'nodecoration' href = "{% url 'listing' i.listing.id %}"> <img src = '{{i.listing.listing_url}}' style="width: 50%"> </a> </div>
+            <div class = 'col-md-4'>
+                <ul style="list-style-type: none">
+                    <li class = "spaced"> <h5><a class = 'nodecoration' href = "{% url 'listing' i.listing.id %}"><strong>{{i.listing.listing}}</strong></a></h5></li>
+                    <li class = "spaced"><strong>Price: </strong>${{i.listing.listing_price}}</li>
+                    <li class = "spaced">Created now by {{i.listing.username}}</li>
+                </ul>
+            </div>
+        </div>
+    {% empty %}
+        <h5>No items currently in your watchlist</h5>
+    {% endfor %}
+{% endblock %}
